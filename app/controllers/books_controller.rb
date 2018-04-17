@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @books = @author.books.all
 
     render json: @books
   end
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params)
+    @book = @author.books.new(book_params)
 
     if @book.save
       render json: @book, status: :created, location: @book
@@ -43,6 +43,10 @@ class BooksController < ApplicationController
     def set_book
       @book = Book.find(params[:id])
     end
+    def set_author
+      @author = Author.find(params[:author_id])
+    end
+
 
     # Only allow a trusted parameter "white list" through.
     def book_params
