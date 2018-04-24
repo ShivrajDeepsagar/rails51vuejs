@@ -1,4 +1,5 @@
 class DecodeAuthenticationCommand < BaseCommand
+  private
   attr_reader :headers
 
   def initialize(headers)
